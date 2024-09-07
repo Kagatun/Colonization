@@ -10,8 +10,6 @@ public class ResourceCollectionArea : MonoBehaviour
         {
             if (resource.IsRaised == true)
             {
-                resource.Remove();
-
                 if (resource is Crystal)
                 {
                     _counter.AddCrystal();
@@ -21,6 +19,8 @@ public class ResourceCollectionArea : MonoBehaviour
                 {
                     _counter.AddCube();
                 }
+
+                resource.Remove();
             }
         }
 

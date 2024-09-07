@@ -13,7 +13,7 @@ public class Collector : MonoBehaviour
                 resource.MakeRaised();
                 resource.transform.position = transform.position;
                 resource.transform.parent = transform;
-                (resource as IToggleable)?.TurnOff();
+                resource.TurnOff();
                 _bot.GoToBase();
             }
         }

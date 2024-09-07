@@ -42,7 +42,7 @@ public class Base : MonoBehaviour
         {
             var availableResources = _resources.Where(resource => resource.IsReserved == false).ToList();
             var availableBots = _bots.Where(bot => bot.DesignatedResource == null && bot.IsBusy == false).ToList();
-            var crystalsToRemove = new List<Resource>();
+            var resourcesToRemove = new List<Resource>();
 
             foreach (var resource in availableResources)
             {
@@ -56,13 +56,13 @@ public class Base : MonoBehaviour
                         bot.AssignResource(resource);
                         bot.GoToResource();
                         resource.GetReserve();
-                        crystalsToRemove.Add(resource);
+                        resourcesToRemove.Add(resource);
                         availableBots.Remove(bot);
                     }
                 }
             }
 
-            foreach (var resource in crystalsToRemove)
+            foreach (var resource in resourcesToRemove)
                 _resources.Remove(resource);
         }
     }

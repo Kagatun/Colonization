@@ -16,7 +16,7 @@ public class Mover : MonoBehaviour
     {
         _positionTarget = positionTarget;
 
-        float speed = 15.0f;
+        float speed = 20.0f;
         float flightAltitude = 0.5f;
         float distanceToTargetSqr = 0.01f;
 

@@ -25,6 +25,10 @@ public abstract class Resource: MonoBehaviour
 
     public void RemoveReserve() => IsReserved = false;
 
+    public abstract void TurnOff();
+
+    public abstract void TurnOn();
+
     private void MoveAwayFromBase(Vector3 basePosition)
     {
         float offsetDistance = 15f;

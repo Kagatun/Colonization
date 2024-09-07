@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Cube : Resource , IToggleable
+public class Cube : Resource
 {
     public Animator Animator { get; private set; }
 
@@ -9,7 +9,7 @@ public class Cube : Resource , IToggleable
         Animator = GetComponent<Animator>();
     }
 
-    public void TurnOff() => Animator.enabled = false;
+    public override void TurnOff() => Animator.enabled = false;
 
-    public void TurnOn() => Animator.enabled = true;
+    public override void TurnOn() => Animator.enabled = true;
 }

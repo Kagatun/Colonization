@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Light))]
-public class Crystal : Resource , IToggleable
+public class Crystal : Resource
 {
     public Light Light { get; private set; }
 
@@ -10,7 +10,7 @@ public class Crystal : Resource , IToggleable
         Light = GetComponent<Light>();
     }
 
-    public void TurnOff() => Light.enabled = false;
+    public override void TurnOff() => Light.enabled = false;
 
-    public void TurnOn() => Light.enabled = true;
+    public override void TurnOn() => Light.enabled = true;
 }

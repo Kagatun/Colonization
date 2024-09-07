@@ -16,7 +16,7 @@ public class SpawnerResources : SpawnerObjects<Resource>
 
     protected override void OnGet(Resource resource)
     {
-        (resource as IToggleable)?.TurnOn();
+        resource.TurnOn();
         resource.MakeUnsupported();
         resource.RemoveReserve();
         resource.Removed += RemoveObject;

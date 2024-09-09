@@ -7,7 +7,7 @@ public class ResourceScanner : MonoBehaviour
 
     private float radius = 500;
 
-    public List<Resource> Scan()
+    public IEnumerable <Resource> Scan()
     {
         List<Resource> resources = new List<Resource>();
 

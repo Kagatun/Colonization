@@ -143,7 +143,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &33045733
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -311,7 +311,7 @@ SphereCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Radius: 0.3
-  m_Center: {x: 0, y: 0, z: -0.15}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!4 &242843611
 Transform:
   m_ObjectHideFlags: 0
@@ -321,7 +321,7 @@ Transform:
   m_GameObject: {fileID: 242843608}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.648, z: 2.262}
+  m_LocalPosition: {x: 0, y: -0.648, z: 2.1}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -354,7 +354,7 @@ Transform:
   m_GameObject: {fileID: 697595769}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.648, z: 2.262}
+  m_LocalPosition: {x: 0, y: -0.648, z: 2.1}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -380,7 +380,7 @@ SphereCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Radius: 0.3
-  m_Center: {x: 0, y: 0, z: -0.15}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &697595772
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -593,6 +593,50 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e25d971a36ade2f4f963b0167d5f11e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1040328486
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1040328488}
+  - component: {fileID: 1040328487}
+  m_Layer: 0
+  m_Name: DatabaseResources
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1040328487
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1040328486}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85452df3194766f45b0b9b74a7253e0c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1040328488
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1040328486}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -4.9202127, y: -14.580522, z: 14.216801}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1196312204
 GameObject:
   m_ObjectHideFlags: 0
@@ -644,7 +688,7 @@ SphereCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Radius: 0.3
-  m_Center: {x: 0, y: 0, z: -0.15}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!4 &1196312207
 Transform:
   m_ObjectHideFlags: 0
@@ -654,7 +698,7 @@ Transform:
   m_GameObject: {fileID: 1196312204}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.648, z: 2.262}
+  m_LocalPosition: {x: 0, y: -0.648, z: 2.1}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -707,7 +751,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32c13abaa7bee2a4cb1d6c5f592b58c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _counter: {fileID: 7763423586572117945}
+  _resourceWarehouse: {fileID: 7763423586572117945}
   _crystalText: {fileID: 2056181204}
   _cubeText: {fileID: 1635126461}
 --- !u!114 &1414303330
@@ -753,8 +797,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d64d307b365d747409c154833ccf5336, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefab: {fileID: 5885032458906317900, guid: 1a6c0e8f432174e4bac286530d487746, type: 3}
-  _repeatRate: 0.7
+  _prefab: {fileID: 5885032458906317900, guid: 1a6c0e8f432174e4bac286530d487746, type: 3}
+  _repeatRate: 10
 --- !u!4 &1421029676
 Transform:
   m_ObjectHideFlags: 0
@@ -1228,7 +1272,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1898964713
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1523,8 +1567,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d64d307b365d747409c154833ccf5336, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefab: {fileID: 5165773040778133613, guid: 5bc4811d113c42e46afe7d73dae29418, type: 3}
-  _repeatRate: 0.3
+  _prefab: {fileID: 5165773040778133613, guid: 5bc4811d113c42e46afe7d73dae29418, type: 3}
+  _repeatRate: 10
 --- !u!114 &525778270627443086
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1560,7 +1604,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9cb6e155d483499478b55504a5ce6679, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _counter: {fileID: 7763423586572117945}
+  _ResourceWarehouse: {fileID: 7763423586572117945}
+  _databaseResources: {fileID: 1040328487}
 --- !u!33 &4742489986686669007
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -1587,7 +1632,7 @@ GameObject:
   - component: {fileID: 4230956648331754143}
   - component: {fileID: 7763423586572117945}
   m_Layer: 0
-  m_Name: "\u0411\u0430\u0437\u0430"
+  m_Name: Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1632,6 +1677,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf165b0fab053904783e0c6836b825c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _databaseResources: {fileID: 1040328487}
   _resourceScanner: {fileID: 525778270627443086}
   _bots:
   - {fileID: 9022045675775395283}
@@ -1769,7 +1815,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5106507331237773577}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 93720d16c7dbc514bbdca2634f7b4fbf, type: 3}
+  m_Script: {fileID: 11500000, guid: aa36b507ab1c23e4a8be07af22a73572, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!4 &8538664439308705642
@@ -1864,6 +1910,7 @@ SceneRoots:
   - {fileID: 963194228}
   - {fileID: 705507995}
   - {fileID: 1839499825}
+  - {fileID: 1040328488}
   - {fileID: 7763423586572117944}
   - {fileID: 8538664439308705642}
   - {fileID: 1898964718}

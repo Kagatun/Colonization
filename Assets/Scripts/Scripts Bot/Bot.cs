@@ -7,7 +7,6 @@ public class Bot : MonoBehaviour
 
     public Resource DesignatedResource { get; private set; }
     public Base DesignatedBase { get; private set; }
-    public bool IsBusy { get; private set; }
 
     public void AssignResource(Resource resource) => DesignatedResource = resource;
 
@@ -18,8 +17,4 @@ public class Bot : MonoBehaviour
     public void GoToBase() => _mover.MovingTowardsGoal(DesignatedBase.transform);
 
     public void GoToResource() => _mover.MovingTowardsGoal(DesignatedResource.transform);
-
-    public void GetBusy() => IsBusy = true;
-
-    public void RemoveBusy() => IsBusy = false;
 }

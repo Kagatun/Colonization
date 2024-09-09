@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class Counter : MonoBehaviour
+public class ResourceWarehouse : MonoBehaviour
 {
     private int _crystalCount = 0;
     private int _cubeCount = 0;

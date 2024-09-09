@@ -17,8 +17,6 @@ public class SpawnerResources : SpawnerObjects<Resource>
     protected override void OnGet(Resource resource)
     {
         resource.TurnOn();
-        resource.MakeUnsupported();
-        resource.RemoveReserve();
         resource.Removed += RemoveObject;
         base.OnGet(resource);
     }
@@ -45,7 +43,7 @@ public class SpawnerResources : SpawnerObjects<Resource>
         Vector3 spawnPoint = new Vector3(spawnRotationX, 0, spawnPositionZ);
         Quaternion spawnRotation = Quaternion.Euler(0, spawnRotationY, 0);
 
-        Resource resource = pool.Get();
+        Resource resource = GetPool().Get();
 
         resource.transform.position = spawnPoint;
         resource.transform.rotation = spawnRotation;

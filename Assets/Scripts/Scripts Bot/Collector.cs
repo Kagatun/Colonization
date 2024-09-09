@@ -10,7 +10,6 @@ public class Collector : MonoBehaviour
         {
             if (_bot.DesignatedResource == resource)
             {
-                resource.MakeRaised();
                 resource.transform.position = transform.position;
                 resource.transform.parent = transform;
                 resource.TurnOff();

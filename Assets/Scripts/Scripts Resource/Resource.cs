@@ -5,31 +5,20 @@ public abstract class Resource: MonoBehaviour
 {
     public event Action<Resource> Removed;
 
-    public bool IsRaised { get; private set; }
-    public bool IsReserved { get; private set; }
-
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.TryGetComponent(out Base @base))
-            if (IsRaised == false)
-                MoveAwayFromBase(@base.transform.position);
+            if (transform.parent == null)
+                MoveSide(@base.transform.position);
     }
 
     public void Remove() => Removed?.Invoke(this);
-
-    public void MakeRaised() => IsRaised = true;
-
-    public void MakeUnsupported() => IsRaised = false;
-
-    public void GetReserve() => IsReserved = true;
-
-    public void RemoveReserve() => IsReserved = false;
 
     public abstract void TurnOff();
 
     public abstract void TurnOn();
 
-    private void MoveAwayFromBase(Vector3 basePosition)
+    private void MoveSide(Vector3 basePosition)
     {
         float offsetDistance = 15f;
         float minRandom = 15f;

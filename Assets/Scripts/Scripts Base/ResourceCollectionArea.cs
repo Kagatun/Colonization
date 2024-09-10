@@ -4,31 +4,21 @@ public class ResourceCollectionArea : MonoBehaviour
 {
     [SerializeField] private ResourceWarehouse _ResourceWarehouse;
     [SerializeField] private DatabaseResources _databaseResources;
+    [SerializeField] private Base _base;
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.TryGetComponent(out Resource resource))
+        if (other.gameObject.TryGetComponent(out Bot bot))
         {
-            if (resource.transform.parent != null)
+            if (bot.DesignatedBase == _base && bot.GetComponentInChildren<Resource>() != null)
             {
-                Bot parentBot = resource.GetComponentInParent<Bot>();
+                Resource resource = bot.GetComponentInChildren<Resource>();
 
+                bot.RemoveDesignatedResource();
+                _databaseResources.RemoveResource(resource);
+                _base.RemoveListResources(resource);
                 resource.Remove();
-
-                if (parentBot != null)
-                {
-                    parentBot.RemoveDesignatedResource();
-                    _databaseResources.RemoveResource(resource);
-                }
-
-                if (resource is Crystal)
-                {
-                    _ResourceWarehouse.AddCrystal();
-                }
-                else if (resource is Cube)
-                {
-                    _ResourceWarehouse.AddCube();
-                }
+                _ResourceWarehouse.AddResource();
             }
         }
     }

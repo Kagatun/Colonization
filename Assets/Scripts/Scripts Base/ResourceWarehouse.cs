@@ -3,21 +3,13 @@ using UnityEngine;
 
 public class ResourceWarehouse : MonoBehaviour
 {
-    private int _crystalCount = 0;
-    private int _cubeCount = 0;
+    private int _resourceCount = 0;
 
-    public event Action<int> CrystalCountChanged;
-    public event Action<int> CubeCountChanged;
+    public event Action<int> ResourceCountChanged;
 
-    public void AddCrystal()
+    public void AddResource()
     {
-        _crystalCount++;
-        CrystalCountChanged?.Invoke(_crystalCount);
-    }
-
-    public void AddCube()
-    {
-        _cubeCount++;
-        CubeCountChanged?.Invoke(_cubeCount);
+        _resourceCount++;
+        ResourceCountChanged?.Invoke(_resourceCount);
     }
 }

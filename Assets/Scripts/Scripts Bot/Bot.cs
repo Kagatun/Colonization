@@ -14,7 +14,7 @@ public class Bot : MonoBehaviour
 
     public void AssignBase(Base designatedBase) => DesignatedBase = designatedBase;
 
-    public void GoToBase() => _mover.MovingTowardsGoal(DesignatedBase.transform);
+    public void GoToBase() => _mover.GoToTarget(DesignatedBase.transform);
 
-    public void GoToResource() => _mover.MovingTowardsGoal(DesignatedResource.transform);
+    public void GoToResource() => _mover.GoToTarget(DesignatedResource.transform);
 }

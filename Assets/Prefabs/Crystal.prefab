@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 4827243026639543831}
   - component: {fileID: 8094717500727685714}
   - component: {fileID: 5885032458906317900}
+  - component: {fileID: 6480308398433720016}
   m_Layer: 3
   m_Name: Crystal
   m_TagString: Untagged
@@ -113,7 +114,7 @@ Rigidbody:
   m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 80
-  m_CollisionDetection: 1
+  m_CollisionDetection: 2
 --- !u!64 &4827243026639543831
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -208,5 +209,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b9e05765ec56f384fb925fc8fa2ffb5b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6480308398433720016
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1281827285438361132}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81999a55da785944faa4e1f6d650ff35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

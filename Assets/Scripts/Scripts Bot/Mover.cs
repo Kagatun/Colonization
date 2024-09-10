@@ -9,14 +9,14 @@ public class Mover : MonoBehaviour
         if (_positionTarget == null)
             return;
 
-        MovingTowardsGoal(_positionTarget);
+        GoToTarget(_positionTarget);
     }
 
-    public void MovingTowardsGoal(Transform positionTarget)
+    public void GoToTarget(Transform positionTarget)
     {
         _positionTarget = positionTarget;
 
-        float speed = 20.0f;
+        float speed = 24.0f;
         float flightAltitude = 0.5f;
         float distanceToTargetSqr = 0.01f;
 

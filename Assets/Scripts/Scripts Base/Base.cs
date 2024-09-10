@@ -9,31 +9,35 @@ public class Base : MonoBehaviour
     [SerializeField] private ResourceScanner _resourceScanner;
     [SerializeField] private List<Bot> _bots = new List<Bot>();
 
-    private List<Resource> _resources = new List<Resource>();
-    private float _repeatRate = 0.1f;
     private Coroutine _scanCoroutine;
+    private List<Resource> _resources = new List<Resource>();
+    private WaitForSecondsRealtime _wait;
+    private float _repeatRate = 0.1f;
+
+    private void Awake()
+    {
+        _wait = new WaitForSecondsRealtime(_repeatRate);
+    }
 
     private void Start()
     {
         AssignBaseBots();
-        _scanCoroutine = StartCoroutine(ScanResourcesPeriodically());
+        _scanCoroutine = StartCoroutine(ScanResourcesRepeatedly());
     }
+
+    public void RemoveListResources(Resource resource) => _resources.Remove(resource);
 
     private void ScanResources()
     {
         FillWithNewResources();
-        print("доступные" + _resources.Count);
-        Vector3 position = transform.position;
-        _resources = _resources.OrderBy(resource => Vector3.Distance(resource.transform.position, position)).ToList();
-
         SetTargetBot();
     }
 
     private void FillWithNewResources()
     {
-        foreach (var resource in _resourceScanner.Scan())
+        foreach (var resource in _resourceScanner.GetFoundResources())
         {
-            if (resource != null && _resources.Contains(resource) == false)
+            if (_resources.Contains(resource) == false)
             {
                 _resources.Add(resource);
             }
@@ -47,22 +51,21 @@ public class Base : MonoBehaviour
         if (availableBots.Count == 0)
             return;
 
-        var freeResources = _databaseResources.GetFreeResource(_resources).ToList();
+        var reservedResources = _databaseResources.GetListReserveResources();
+        var freeResources = _resources.Where(freeResource => reservedResources.Contains(freeResource)==false).ToList();
 
-        foreach (var resource in freeResources)
+        _resources = freeResources.OrderBy(resource => Vector3.Distance(resource.transform.position, transform.position)).ToList();
+
+        if (_resources.Count == 0)
+            return;
+
+        int resourcesToAssign = Mathf.Min(availableBots.Count, _resources.Count);
+
+        for (int i = 0; i < resourcesToAssign; i++)
         {
-            if (availableBots.Count == 0)
-                break;
-
-            var bot = availableBots.FirstOrDefault();
-
-            bot.AssignResource(resource);
-            bot.GoToResource();
-
-            _databaseResources.ReserveResource(resource);
-            _resources.Remove(resource);
-
-            availableBots.Remove(bot);
+            availableBots[i].AssignResource(_resources[i]);
+            availableBots[i].GoToResource();
+            _databaseResources.ReserveResource(_resources[i]);
         }
     }
 
@@ -74,13 +77,13 @@ public class Base : MonoBehaviour
         }
     }
 
-    private IEnumerator ScanResourcesPeriodically()
+    private IEnumerator ScanResourcesRepeatedly()
     {
         while (enabled == true)
         {
             ScanResources();
 
-            yield return new WaitForSeconds(_repeatRate);
+            yield return _wait;
         }
     }
 }

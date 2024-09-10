@@ -5,7 +5,7 @@ public class TargetPursuer : MonoBehaviour
     [SerializeField] private Transform _transformTarget;
     [SerializeField] private Vector3 _offset;
 
-    private void Update()
+    private void Start()
     {
         if (_transformTarget != null)
         {

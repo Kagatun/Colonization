@@ -5,7 +5,7 @@ public class MoverCamera : MonoBehaviour
     private const string Horizontal = "Horizontal";
     private const string Vertical = "Vertical";
 
-    private float _speed = 45f;
+    private float _speed = 80f;
 
     private void Update()
     {

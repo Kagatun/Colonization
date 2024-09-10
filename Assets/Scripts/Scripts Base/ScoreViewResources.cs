@@ -4,28 +4,20 @@ using UnityEngine;
 public class ScoreViewResources : MonoBehaviour
 {
     [SerializeField] private ResourceWarehouse _resourceWarehouse;
-    [SerializeField] private TMP_Text _crystalText;
-    [SerializeField] private TMP_Text _cubeText;
+    [SerializeField] private TMP_Text _resourceText;
 
     private void OnEnable()
     {
-        _resourceWarehouse.CrystalCountChanged += OnCrystalCountChanged;
-        _resourceWarehouse.CubeCountChanged += OnCubeCountChanged;
+        _resourceWarehouse.ResourceCountChanged += OResourceCountChanged;
     }
 
     private void OnDisable()
     {
-        _resourceWarehouse.CrystalCountChanged -= OnCrystalCountChanged;
-        _resourceWarehouse.CubeCountChanged -= OnCubeCountChanged;
+        _resourceWarehouse.ResourceCountChanged -= OResourceCountChanged;
     }
 
-    private void OnCrystalCountChanged(int count)
+    private void OResourceCountChanged(int count)
     {
-        _crystalText.text = "Кристаллы: " + count.ToString();
-    }
-
-    private void OnCubeCountChanged(int count)
-    {
-        _cubeText.text = "Кубы: " + count.ToString();
+        _resourceText.text = "Ресурсы: " + count.ToString();
     }
 }

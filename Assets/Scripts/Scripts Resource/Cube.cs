@@ -9,7 +9,9 @@ public class Cube : Resource
         Animator = GetComponent<Animator>();
     }
 
-    public override void TurnOff() => Animator.enabled = false;
+    public override void TurnOff() =>
+        Animator.enabled = false;
 
-    public override void TurnOn() => Animator.enabled = true;
+    public override void TurnOn() =>
+        Animator.enabled = true;
 }

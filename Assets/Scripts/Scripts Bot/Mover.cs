@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class Mover : MonoBehaviour
 {
+    private float _speed = 25;
+
     private Transform _positionTarget;
 
     private void Update()
@@ -16,7 +18,6 @@ public class Mover : MonoBehaviour
     {
         _positionTarget = positionTarget;
 
-        float speed = 24.0f;
         float flightAltitude = 0.5f;
         float distanceToTargetSqr = 0.01f;
 
@@ -28,7 +29,7 @@ public class Mover : MonoBehaviour
             direction.Normalize();
             transform.forward = direction;
 
-            Vector3 newPosition = transform.position + transform.forward * speed * Time.deltaTime;
+            Vector3 newPosition = transform.position + transform.forward * _speed * Time.deltaTime;
             newPosition.y = Mathf.Max(newPosition.y, flightAltitude);
 
             transform.position = newPosition;

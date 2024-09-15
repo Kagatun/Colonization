@@ -12,14 +12,33 @@ public class ResourceCollectionArea : MonoBehaviour
         {
             if (bot.DesignatedBase == _base && bot.GetComponentInChildren<Resource>() != null)
             {
-                Resource resource = bot.GetComponentInChildren<Resource>();
-
-                bot.RemoveDesignatedResource();
-                _databaseResources.RemoveResource(resource);
-                _base.RemoveListResources(resource);
-                resource.Remove();
-                _ResourceWarehouse.AddResource();
+                PickUpResource(bot);
             }
         }
     }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.TryGetComponent(out Bot bot))
+        {
+            if (bot.DesignatedBase == _base && bot.GetComponentInChildren<Resource>() != null)
+            {
+                PickUpResource(bot);
+            }
+        }
+    }
+
+    private void PickUpResource(Bot bot)
+    {
+        Resource resource = bot.GetComponentInChildren<Resource>();
+
+        bot.RemoveDesignatedResource();
+        _databaseResources.RemoveResource(resource);
+        _base.RemoveListResources(resource);
+        resource.Remove();
+        _ResourceWarehouse.AddResource();
+    }
+
+    public void AssignDatabaseResources(DatabaseResources databaseResources) =>
+        _databaseResources = databaseResources;
 }

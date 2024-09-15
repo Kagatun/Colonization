@@ -10,7 +10,9 @@ public class Crystal : Resource
         Light = GetComponent<Light>();
     }
 
-    public override void TurnOff() => Light.enabled = false;
+    public override void TurnOff() =>
+        Light.enabled = false;
 
-    public override void TurnOn() => Light.enabled = true;
+    public override void TurnOn() =>
+        Light.enabled = true;
 }

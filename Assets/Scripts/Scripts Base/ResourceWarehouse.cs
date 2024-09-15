@@ -3,13 +3,19 @@ using UnityEngine;
 
 public class ResourceWarehouse : MonoBehaviour
 {
-    private int _resourceCount = 0;
+    [field: SerializeField] public int ResourceCount { get; private set; } = 0;
 
     public event Action<int> ResourceCountChanged;
 
     public void AddResource()
     {
-        _resourceCount++;
-        ResourceCountChanged?.Invoke(_resourceCount);
+        ResourceCount++;
+        ResourceCountChanged?.Invoke(ResourceCount);
+    }
+
+    public void RemoveResource(int price)
+    {
+        ResourceCount -= price;
+        ResourceCountChanged?.Invoke(ResourceCount);
     }
 }

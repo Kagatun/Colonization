@@ -11,8 +11,9 @@ public class Collector : MonoBehaviour
             if (_bot.DesignatedResource == resource)
             {
                 resource.transform.position = transform.position;
-                resource.transform.parent = transform;
+                resource.SetParent(transform);
                 resource.TurnOff();
+
                 _bot.GoToBase();
             }
         }

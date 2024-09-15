@@ -8,6 +8,7 @@ public class ScoreViewResources : MonoBehaviour
 
     private void OnEnable()
     {
+        if(_resourceWarehouse!= null)
         _resourceWarehouse.ResourceCountChanged += OResourceCountChanged;
     }
 
@@ -16,8 +17,12 @@ public class ScoreViewResources : MonoBehaviour
         _resourceWarehouse.ResourceCountChanged -= OResourceCountChanged;
     }
 
-    private void OResourceCountChanged(int count)
+    public void AssignResourceWarehouse(ResourceWarehouse resourceWarehouse)
     {
-        _resourceText.text = "Ресурсы: " + count.ToString();
+        _resourceWarehouse = resourceWarehouse;
+        _resourceWarehouse.ResourceCountChanged += OResourceCountChanged;
     }
+
+    private void OResourceCountChanged(int count) =>
+        _resourceText.text = "Ресурсы: " + count.ToString();
 }

@@ -7,13 +7,16 @@ public class SpawnerScoreViewResources : SpawnerObjects<ScoreViewResources>
 
     private void OnEnable()
     {
-        _spawnerBases.BaseSpawned += Spawn;
+        _spawnerBases.BaseSpawned += OnSpawn;
     }
 
     private void OnDisable()
     {
-        _spawnerBases.BaseSpawned -= Spawn;
+        _spawnerBases.BaseSpawned -= OnSpawn;
     }
+
+    private void OnSpawn(Base @base) =>
+        SpawnScoreViewResources(@base);
 
     private ScoreViewResources SpawnScoreViewResources(Base @base)
     {
@@ -21,14 +24,11 @@ public class SpawnerScoreViewResources : SpawnerObjects<ScoreViewResources>
         float offsetY = 6f;
         float offsetZ = 0.74f;
 
-        ScoreViewResources scoreViewResources = GetPool().Get();
+        ScoreViewResources scoreViewResources = Get();
         scoreViewResources.AssignResourceWarehouse(@base.ResourceWarehouse);
         scoreViewResources.transform.position = @base.transform.position + new Vector3(offsetX, offsetY, offsetZ);
         scoreViewResources.transform.SetParent(_canvas.transform);
 
         return scoreViewResources;
     }
-
-    private void Spawn(Base @base) =>
-        SpawnScoreViewResources(@base);
 }

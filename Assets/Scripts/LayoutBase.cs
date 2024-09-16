@@ -13,7 +13,21 @@ public class LayoutBase : MonoBehaviour
     private void Awake()
     {
         _renderer = GetComponent<Renderer>();
-        _renderer.material.color = _colorGreen;
+        _renderer.material.color = _colorRed;
+    }
+
+    private void Update()
+    {
+        if(_touchedObjects.Count > 0)
+        {
+            _renderer.material.color = _colorRed;
+            CanInstall = false;
+        }
+        else
+        {
+            _renderer.material.color = _colorGreen;
+            CanInstall = true;
+        }
     }
 
     private void OnDisable()
@@ -23,48 +37,35 @@ public class LayoutBase : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.TryGetComponent(out Base _))
+        if (other.gameObject.TryGetComponent(out Base @base))
         {
-            HandleObjectEnter(other.gameObject);
+            _touchedObjects.Add(other.gameObject);
         }
-        else if (other.gameObject.TryGetComponent(out Resource resource) && resource.transform.parent == null)
+
+        if (other.gameObject.TryGetComponent(out Resource resource) && resource.transform.parent == null)
         {
-            HandleObjectEnter(other.gameObject);
-            resource.Selected += OnResourceSelected;
+            _touchedObjects.Add(resource.gameObject);
+        }
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.TryGetComponent(out Resource resource) && resource.transform.parent != null)
+        {
+            _touchedObjects.Remove(other.gameObject);
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        HandleObjectExit(other.gameObject);
-    }
-
-    private void HandleObjectEnter(GameObject obj)
-    {
-        _renderer.material.color = _colorRed;
-        CanInstall = false;
-        _touchedObjects.Add(obj);
-    }
-
-    private void HandleObjectExit(GameObject obj)
-    {
-        if (_touchedObjects.Remove(obj))
+        if (other.gameObject.TryGetComponent(out Base @base))
         {
-            if (obj.TryGetComponent(out Resource resource))
-            {
-                resource.Selected -= OnResourceSelected;
-            }
-
-            if (_touchedObjects.Count == 0)
-            {
-                _renderer.material.color = _colorGreen;
-                CanInstall = true;
-            }
+            _touchedObjects.Remove(@base.gameObject);
         }
-    }
 
-    private void OnResourceSelected(Resource resource)
-    {
-        HandleObjectExit(resource.gameObject);
+        if (other.gameObject.TryGetComponent(out Resource resource) && resource.transform.parent == null)
+        {
+            _touchedObjects.Remove(resource.gameObject);
+        }
     }
 }

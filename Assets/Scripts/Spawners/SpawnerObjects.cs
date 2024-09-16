@@ -12,8 +12,8 @@ public abstract class SpawnerObjects<T> : MonoBehaviour where T : MonoBehaviour
         _pool = new ObjectPool<T>(CreateObject, OnGet, OnRelease, Destroy, true);
     }
 
-    protected ObjectPool<T> GetPool() =>
-        _pool;
+    protected T Get() =>
+        _pool.Get();
 
     protected void ReleaseToPool(T obj) =>
         _pool.Release(obj);

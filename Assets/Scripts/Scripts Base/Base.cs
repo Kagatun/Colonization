@@ -72,7 +72,7 @@ public class Base : MonoBehaviour
         if (availableBots.Count == 0)
             return;
 
-        var reservedResources = _databaseResources.GetListReserveResources();
+        var reservedResources = _databaseResources.ResourcesReserved;
         var freeResources = _resources.Where(freeResource => reservedResources.Contains(freeResource) == false).ToList();
 
         _resources = freeResources.OrderBy(resource => (resource.transform.position - transform.position).sqrMagnitude).ToList();

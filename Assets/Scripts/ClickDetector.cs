@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class ClickDetector : MonoBehaviour
 {
+    [SerializeField] private InputDetector _inputDetector;
     [SerializeField] private Camera _mainCamera;
     [SerializeField] private LayoutBase _layoutBase;
     [SerializeField] private LayerMask _layerMaskMars;
@@ -14,56 +15,63 @@ public class ClickDetector : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            Ray ray = _mainCamera.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
+        if (_isEffectActive)
+            FollowCursor();
 
-            if (Physics.Raycast(ray, out hit, Mathf.Infinity, ~_layerMaskIgnoreRaycast))
-            {
-                if (hit.transform.TryGetComponent(out Base @base))
-                {
-                    if (_isEffectActive && _selectedBase == @base)
-                    {
-                        TurnOffCursorTrackingEffect();
-
-                        return;
-                    }
-
-                    ResetSelect();
-
-                    _selectedBase = @base;
-                    _selectedBeacon = @base.Beacon;
-
-                    if (@base.Beacon.CanBeMoved == true)
-                    {
-                        _isEffectActive = true;
-                    }
-
-                    SwapCursor(hit);
-                }
-
-                if (_isEffectActive && ((1 << hit.transform.gameObject.layer) & _layerMaskMars) != 0 && _layoutBase.CanInstall == true && _selectedBeacon.CanBeMoved == true)
-                {
-                    ToPutBeacon(hit);
-                }
-            }
-        }
-
-        if (Input.GetMouseButtonDown(1) && _isEffectActive && _selectedBeacon.CanBeMoved == true)
-        {
-            TurnOffBeacon();
-        }
-
-        if(_selectedBeacon != null && _selectedBeacon.CanBeMoved == false)
+        if (_selectedBeacon != null && _selectedBeacon.CanBeMoved == false)
         {
             TurnOffCursorTrackingEffect();
         }
+    }
 
-        if (_isEffectActive)
+    private void OnEnable()
+    {
+        _inputDetector.LeftClicked += OnHandleLeftClick;
+        _inputDetector.RightClicked += OnHandleRightClick;
+    }
+
+    private void OnDisable()
+    {
+        _inputDetector.LeftClicked -= OnHandleLeftClick;
+        _inputDetector.RightClicked -= OnHandleRightClick;
+    }
+
+    private void OnHandleLeftClick()
+    {
+        Ray ray = _mainCamera.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity, ~_layerMaskIgnoreRaycast))
         {
-            FollowCursor();
+            if (hit.transform.TryGetComponent(out Base @base))
+            {
+                if (_isEffectActive && _selectedBase == @base)
+                {
+                    TurnOffCursorTrackingEffect();
+
+                    return;
+                }
+
+                ResetSelect();
+
+                _selectedBase = @base;
+                _selectedBeacon = @base.Beacon;
+
+                if (_selectedBeacon != null && _selectedBeacon.CanBeMoved)
+                    _isEffectActive = true;
+
+                SwapCursor(hit);
+            }
+
+            if (_isEffectActive && ((1 << hit.transform.gameObject.layer) & _layerMaskMars) != 0 && _layoutBase.CanInstall && _selectedBeacon != null && _selectedBeacon.CanBeMoved)
+                ToPutBeacon(hit);
         }
+    }
+
+    private void OnHandleRightClick()
+    {
+        if (_isEffectActive && _selectedBeacon != null && _selectedBeacon.CanBeMoved)
+            TurnOffBeacon();
     }
 
     private void FollowCursor()
@@ -78,9 +86,7 @@ public class ClickDetector : MonoBehaviour
             _layoutBase.transform.position = hitPoint;
 
             if (hit.transform.gameObject != _previousHitObject)
-            {
                 _previousHitObject = hit.transform.gameObject;
-            }
         }
         else
         {
@@ -90,11 +96,11 @@ public class ClickDetector : MonoBehaviour
 
     private void SwapCursor(RaycastHit hit)
     {
-        if (_isEffectActive == true)
+        if (_isEffectActive)
         {
             TurnOnCursorTrackingEffect(hit);
         }
-        else if (_selectedBeacon.IsActivated == false)
+        else if (_selectedBeacon != null && !_selectedBeacon.IsActivated)
         {
             TurnOffCursorTrackingEffect();
         }

@@ -7,15 +7,12 @@ public class SpawnerBots : SpawnerObjects<Bot>
 
     public Bot SpawnBot(Base @base)
     {
-        Bot bot = GetPool().Get();
+        Bot bot = Get();
         bot.AssignBase(@base);
         bot.transform.position = @base.transform.position;
 
         return bot;
     }
-
-    public void OnSpecifyArrivalBot(Bot bot) =>
-    BotSpawned?.Invoke(this, bot);
 
     protected override void OnGet(Bot bot)
     {
@@ -34,4 +31,7 @@ public class SpawnerBots : SpawnerObjects<Bot>
         bot.Arrived -= OnSpecifyArrivalBot;
         base.Destroy(bot);
     }
+
+    private void OnSpecifyArrivalBot(Bot bot) =>
+        BotSpawned?.Invoke(this, bot);
 }

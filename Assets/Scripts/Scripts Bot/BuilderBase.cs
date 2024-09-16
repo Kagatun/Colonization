@@ -1,17 +1,19 @@
+using System;
 using UnityEngine;
 
 public class BuilderBase : MonoBehaviour
 {
-    [SerializeField] private Bot _bot;
+    private Beacon _designatedBeacon;
+
+    public event Action<Beacon> BeaconCollected;
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.TryGetComponent(out Beacon beacon))
         {
-            if (_bot.DesignatedBeacon == beacon)
+            if (_designatedBeacon == beacon)
             {
-                _bot.SpecifyArrivalBot();
-                _bot.RemoveDesignatedBeacon();
+                BeaconCollected?.Invoke(beacon);
 
                 beacon.AllowMove();
                 beacon.ProhibitInstallation();
@@ -19,4 +21,7 @@ public class BuilderBase : MonoBehaviour
             }
         }
     }
+
+    public void SetDesignatedBeacon(Beacon beacon) =>
+        _designatedBeacon = beacon;
 }

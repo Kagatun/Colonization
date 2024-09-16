@@ -8,35 +8,29 @@ public class ResourceCollectionArea : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.TryGetComponent(out Bot bot))
-        {
-            if (bot.DesignatedBase == _base && bot.GetComponentInChildren<Resource>() != null)
-            {
-                PickUpResource(bot);
-            }
-        }
+        PickUpResource(other);
     }
 
     private void OnTriggerStay(Collider other)
     {
+        PickUpResource(other);
+    }
+
+    private void PickUpResource(Collider other)
+    {
         if (other.gameObject.TryGetComponent(out Bot bot))
         {
             if (bot.DesignatedBase == _base && bot.GetComponentInChildren<Resource>() != null)
             {
-                PickUpResource(bot);
+                Resource resource = bot.GetComponentInChildren<Resource>();
+
+                bot.RemoveDesignatedResource();
+                _databaseResources.RemoveResource(resource);
+                _base.RemoveListResources(resource);
+                resource.Remove();
+                _ResourceWarehouse.AddResource();
             }
         }
-    }
-
-    private void PickUpResource(Bot bot)
-    {
-        Resource resource = bot.GetComponentInChildren<Resource>();
-
-        bot.RemoveDesignatedResource();
-        _databaseResources.RemoveResource(resource);
-        _base.RemoveListResources(resource);
-        resource.Remove();
-        _ResourceWarehouse.AddResource();
     }
 
     public void AssignDatabaseResources(DatabaseResources databaseResources) =>

@@ -27,7 +27,7 @@ public class SpawnerBases : SpawnerObjects<Base>
         float offsetY = 0.1f;
         float offsetZ = -1.86f;
 
-        Base newBase = GetPool().Get();
+        Base newBase = Get();
         newBase.AssignDatabaseResources(_databaseResources);
         newBase.AssignSpawnerBots(spawnerBots);
         newBase.AddBot(bot);

@@ -52,7 +52,7 @@ public class SpawnerResources : SpawnerObjects<Resource>
 
         } while (GetAllowedDistance(spawnPoint, bases, beacons) == false);
 
-        Resource resource = GetPool().Get();
+        Resource resource = Get();
         resource.transform.position = spawnPoint;
         resource.transform.rotation = Quaternion.Euler(0, Random.Range(_minRandom, _maxRandom), 0);
 

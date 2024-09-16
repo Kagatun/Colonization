@@ -1,21 +1,27 @@
+using System;
 using UnityEngine;
 
 public class Collector : MonoBehaviour
 {
-    [SerializeField] private Bot _bot;
+    private Resource _designatedResource;
+
+    public event Action<Resource> ResourceCollected;
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.TryGetComponent(out Resource resource))
         {
-            if (_bot.DesignatedResource == resource)
+            if (_designatedResource == resource)
             {
-                resource.transform.position = transform.position;
-                resource.SetParent(transform);
-                resource.TurnOff();
+                ResourceCollected?.Invoke(resource);
 
-                _bot.GoToBase();
+                resource.transform.parent = transform;
+                resource.transform.position = transform.position;
+                resource.TurnOff();
             }
         }
     }
+
+    public void SetDesignatedResource(Resource resource) =>
+        _designatedResource = resource;
 }

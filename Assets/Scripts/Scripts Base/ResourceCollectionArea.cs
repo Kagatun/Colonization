@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class ResourceCollectionArea : MonoBehaviour
 {
-    [SerializeField] private ResourceWarehouse _ResourceWarehouse;
+    [SerializeField] private ResourceWarehouse _resourceWarehouse;
     [SerializeField] private DatabaseResources _databaseResources;
     [SerializeField] private Base _base;
 
@@ -28,7 +28,7 @@ public class ResourceCollectionArea : MonoBehaviour
                 _databaseResources.RemoveResource(resource);
                 _base.RemoveListResources(resource);
                 resource.Remove();
-                _ResourceWarehouse.AddResource();
+                _resourceWarehouse.AddResource();
             }
         }
     }

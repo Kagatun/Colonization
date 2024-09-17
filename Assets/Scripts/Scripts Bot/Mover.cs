@@ -2,16 +2,13 @@ using UnityEngine;
 
 public class Mover : MonoBehaviour
 {
-    private float _speed = 25;
-
     private Transform _positionTarget;
+    private float _speed = 25;
 
     private void Update()
     {
-        if (_positionTarget == null)
-            return;
-
-        GoToTarget(_positionTarget);
+        if (_positionTarget != null)
+            GoToTarget(_positionTarget);
     }
 
     public void GoToTarget(Transform positionTarget)

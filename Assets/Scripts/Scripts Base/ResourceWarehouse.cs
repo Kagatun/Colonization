@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class ResourceWarehouse : MonoBehaviour
 {
-    [field: SerializeField] public int ResourceCount { get; private set; } = 0;
+    [field: SerializeField] public int ResourceCount { get; private set; }
 
     public event Action<int> ResourceCountChanged;
 

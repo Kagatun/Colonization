@@ -307,7 +307,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9cb6e155d483499478b55504a5ce6679, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _ResourceWarehouse: {fileID: 6411875410198152308}
+  _resourceWarehouse: {fileID: 6411875410198152308}
   _databaseResources: {fileID: 0}
   _base: {fileID: 3991132702267818471}
 --- !u!114 &6411875410198152308
